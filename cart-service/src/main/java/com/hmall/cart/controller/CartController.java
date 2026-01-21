@@ -9,12 +9,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @Api(tags = "购物车相关接口")
 @RestController
 @RequestMapping("/carts")
@@ -36,7 +38,9 @@ public class CartController {
 
     @ApiOperation("删除购物车中商品")
     @DeleteMapping("{id}")
-    public void deleteCartItem(@Param ("购物车条目id")@PathVariable("id") Long id){
+    public void deleteCartItem(@Param ("购物车条目id")@PathVariable("id") Long id,@RequestHeader(value = "user-info",required = false) String userInfo){
+
+        log.info("userInfo:{}",userInfo);
         cartService.removeById(id);
     }
 

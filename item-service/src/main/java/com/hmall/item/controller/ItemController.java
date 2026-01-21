@@ -12,10 +12,12 @@ import com.hmall.item.service.IItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Api(tags = "商品管理相关接口")
 @RestController
 @RequestMapping("/items")
@@ -26,7 +28,9 @@ public class ItemController {
 
     @ApiOperation("分页查询商品")
     @GetMapping("/page")
-    public PageDTO<ItemDTO> queryItemByPage(PageQuery query) {
+    public PageDTO<ItemDTO> queryItemByPage(PageQuery query,@RequestHeader(value = "truth",required = false)String truth) {
+
+        log.info("truth: {}",truth);
         // 1.分页查询
         Page<Item> result = itemService.page(query.toMpPage("update_time", false));
         // 2.封装并返回

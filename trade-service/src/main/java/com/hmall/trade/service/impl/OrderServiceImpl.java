@@ -5,6 +5,7 @@ import com.hmall.api.client.CartClient;
 import com.hmall.api.client.ItemClient;
 import com.hmall.api.domain.dto.ItemDTO;
 import com.hmall.common.exception.BadRequestException;
+import com.hmall.common.utils.UserContext;
 import com.hmall.trade.domain.dto.OrderDetailDTO;
 import com.hmall.trade.domain.dto.OrderFormDTO;
 import com.hmall.trade.domain.po.Order;
@@ -68,10 +69,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             total += item.getPrice() * itemNumMap.get(item.getId());
         }
         order.setTotalFee(total);
-        // 1.5.其它属性 TODO
+        // 1.5.其它属性
         order.setPaymentType(orderFormDTO.getPaymentType());
-//        order.setUserId(UserContext.getUser());
-        order.setUserId(1L);
+       order.setUserId(UserContext.getUser());
         order.setStatus(1);
         // 1.6.将Order写入数据库order表中
         save(order);
