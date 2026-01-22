@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: trade-service
+  profiles:
+    active: dev
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8090 # 负责监听的地址加端口
+      http-method-specify: true # 请求方式前缀，区分restful请求方式 同一路径
+    nacos:
+      server-addr: 192.168.100.131:8848
+      config:
+        file-extension: yaml
+        shared-configs:
+          - data-id: shared-jdbc.yaml
+          - data-id: shared-log.yaml
+          - data-id: shared-swagger.yaml
+          - data-id: shared-seata.yaml

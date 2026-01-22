@@ -1,7 +1,11 @@
+seata:
+  data-source-proxy-mode: AT
 server:
   port: 8081
 feign:
   okhttp:
+    enabled: true
+  sentinel:
     enabled: true
 hm:
   db:
@@ -10,6 +14,6 @@ hm:
     database: hm-cart
     port: 3307
   swagger:
-    title: "黑马商城购物车管理接口文档"
-    desc: "黑马商城购物车管理接口文档"
+    title: "购物车管理接口文档"
+    desc: "购物车管理接口文档"
     package: com.hmall.cart.controller
